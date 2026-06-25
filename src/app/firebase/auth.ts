@@ -12,25 +12,27 @@ export const auth = getAuth(app);
 export const provider = new GoogleAuthProvider();
 
 export const handleGoogleLogin = async () => {
+  const result = await signInWithPopup(auth, provider);
+  const userData = result.user;
   try {
-    const result = await signInWithPopup(auth, provider);
-    const userData = result.user;
-
-    await setDoc(doc(db, "users", userData.uid), {
-      uid: userData.uid,
-      name: userData.displayName,
-      email: userData.email,
-      createdAt: new Date(),
-    });
-    return userData;
+    await setDoc(
+      doc(db, "users", userData.uid),
+      {
+        uid: userData.uid,
+        name: userData.displayName,
+        email: userData.email,
+      },
+      { merge: true },
+    );
   } catch (error) {
     console.error(error);
   }
+  return result;
 };
 
 export const handleGoogleLogout = async () => {
   try {
-    signOut(auth);
+    await signOut(auth);
   } catch (erro) {
     console.log(erro);
   }
