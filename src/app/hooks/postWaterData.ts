@@ -19,5 +19,7 @@ export default async function postWaterData({
         interval,
         uid,
         onboarding: true,
+        now:0,
+        count:0
     });
 }
