@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation"
-import postWaterData from "../hooks/postWaterData"
 import { useAuthStore } from "../store/authStore"
+import usePostWaterData from "../hooks/usePostWaterData"
 
 type Props = {
     target: number
@@ -12,7 +12,7 @@ export default function SubmitButton({ interval, target }: Props) {
     const user = useAuthStore((state) => state.user)
     const handleSubmit = async () => {
         if (!user) return
-        await postWaterData({ uid: user?.uid, target, interval })
+        await usePostWaterData({ uid: user?.uid, target, interval })
         router.replace('/')
     }
     return (
