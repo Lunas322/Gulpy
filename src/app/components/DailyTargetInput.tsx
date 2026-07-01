@@ -11,7 +11,7 @@ export default function DailyTargetInput({ value, onChange }: Props) {
                 하루 목표량
             </label>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 text-slate-500">
                 <input
                     type="number"
                     value={value}
