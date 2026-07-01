@@ -29,7 +29,7 @@ export default function ReminderIntervalSelector({ value, onChange }: Props) {
                             value={minute}
                             checked={value === minute}
                             onChange={(e) => onChange(Number(e.target.value))}
-                            className="hidden"
+                            className="sr-only"
                         />
                         {minute}분
                     </label>
