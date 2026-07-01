@@ -13,8 +13,9 @@ export default async function postWaterData({
     uid,
 }: Params) {
     const todayStr = new Date().toISOString().slice(0, 10);
-    if (target === 0 || !interval) return;
-
+    if (!target || target <= 0 || !interval) {
+    throw new Error("target / interval 값이 올바르지 않습니다");
+    }
     await setDoc(doc(db, "users", uid), {
         target,
         interval,
