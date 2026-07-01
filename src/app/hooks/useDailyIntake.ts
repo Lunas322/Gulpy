@@ -5,7 +5,7 @@ import { db } from "../firebase/firestore";
 import { useEffect } from "react";
 
 type Params = {
-    data?: Water |null |undefined;
+    data?: Water | null | undefined;
 };
 
 export default function useDailyIntake({ data }: Params) {
@@ -19,14 +19,19 @@ export default function useDailyIntake({ data }: Params) {
 
         const checkAndReset = async () => {
             if (data.date === todayStr) return;
+            try {
+                const ref = doc(db, "users", user.uid);
 
-            const ref = doc(db, "users", user.uid);
+                await updateDoc(ref, {
+                    date: todayStr,
+                    now: 0,
+                    count: 0,
+                });
+            } catch (error) {
+                console.error(error)
+            }
 
-            await updateDoc(ref, {
-                date: todayStr,
-                now: 0,
-                count: 0,
-            });
+
         };
 
         checkAndReset();
