@@ -7,7 +7,7 @@ type Params = {
     uid: string;
 };
 
-export default async function usePostWaterData({
+export default async function postWaterData({
     target,
     interval,
     uid,
@@ -19,7 +19,7 @@ export default async function usePostWaterData({
         interval,
         uid,
         onboarding: true,
-        now:0,
-        count:0
+        now: 0,
+        count: 0,
     });
 }
