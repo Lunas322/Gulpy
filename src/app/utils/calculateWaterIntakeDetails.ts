@@ -3,7 +3,9 @@ import { Water } from "../types/water"
 
 export function getWaterPercent(data?: Water) {
   if (!data?.target) return 0;
-  return Math.min((data.now / data.target) * 100, 100);
+  return  data?.target
+  ? Number(((data.now / data.target) * 100).toFixed(2))
+  : 0;;
 }
 
 export function getRemainingWater(data?: Water) {
