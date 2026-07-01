@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore"
+
 export type Water = {
     target: number
     interval: number
@@ -5,4 +7,5 @@ export type Water = {
     uid: string
     count: number
     now: number
+    date: string
 }
