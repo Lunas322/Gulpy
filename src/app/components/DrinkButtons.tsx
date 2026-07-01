@@ -1,9 +1,15 @@
 import useDrinkWater from "../hooks/useDrinkWater"
+import { Water } from "../types/water"
+import DrinkButtonsSkeleton from "./skeletons/DrinkButtonsSkeleton"
 
-
-export default function DrinkButtons() {
+type Props = {
+    loading: boolean
+    data: Water
+}
+export default function DrinkButtons({ loading, data }: Props) {
     const waters = [{ water: 100, imoji: '🥛' }, { water: 200, imoji: '🥤' }, { water: 300, imoji: '💧' }, { water: 500, imoji: '🧴' }]
     const { handleDrink } = useDrinkWater()
+    if (loading || !data) return <DrinkButtonsSkeleton />
     return (
         <div className="grid grid-cols-2 gap-4">
             {waters.map((data) => {

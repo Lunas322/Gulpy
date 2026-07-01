@@ -1,6 +1,6 @@
 import { Water } from "../types/water"
 import { getWaterPercent } from "../utils/calculateWaterIntakeDetails"
-import WaterDashBoardSkeleton from "./WaterDashBoardSkeleton"
+import WaterDashBoardSkeleton from "./skeletons/WaterDashBoardSkeleton"
 
 
 
@@ -14,7 +14,7 @@ type Props = {
 export default function WaterDashBoardCard({ data, loading }: Props) {
   const percent = getWaterPercent(data)
 
-  if (loading) return <WaterDashBoardSkeleton />
+  if (loading || !data) return <WaterDashBoardSkeleton />
   return (
     <section className="rounded-3xl bg-white p-6 shadow-lg">
       <div className="flex items-center justify-between">

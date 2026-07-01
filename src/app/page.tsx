@@ -25,10 +25,10 @@ export default function Home() {
             빠르게 추가하기
           </h3>
 
-          <DrinkButtons />
+          <DrinkButtons data={data as Water} loading={loading}/>
         </section>
 
-        <DailyWaterSummary data={data as Water} />
+        <DailyWaterSummary data={data as Water}  loading={loading}/>
       </div>
     </main>
   );

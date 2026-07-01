@@ -1,11 +1,16 @@
 import { Water } from "../types/water";
 import { getRemainingWater, getWaterPercent } from "../utils/calculateWaterIntakeDetails";
+import DailyWaterSummarySkeleton from "./skeletons/DailyWaterSummarySkeleton";
 
 
 type Props = {
   data: Water
+  loading: boolean
 }
-export default function DailyWaterSummary({ data }: Props) {
+export default function DailyWaterSummary({ data, loading }: Props) {
+
+  if (loading || !data) return <DailyWaterSummarySkeleton />
+
   return (
     <section className="mt-8 rounded-3xl bg-white p-6 shadow  text-slate-500">
       <h3 className="mb-4 text-lg font-semibold">
