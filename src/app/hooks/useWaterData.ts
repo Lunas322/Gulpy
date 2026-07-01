@@ -7,7 +7,7 @@ import { db } from "../firebase/firestore";
 
 export default function useWaterData() {
     const user = useAuthStore((state) => state.user)
-    const [data, setData] = useState<Water | null>()
+    const [data, setData] = useState<Water | null>(null)
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
