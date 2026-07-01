@@ -5,27 +5,30 @@ import useWaterData from "./hooks/useWaterData";
 import { Water } from "./types/water";
 import DrinkButtons from "./components/DrinkButtons";
 import DailyWaterSummary from "./components/DailyWaterSummary";
+import useDailyIntake from "./hooks/useDailyIntake";
 
 export default function Home() {
 
 
-const {data,loading} = useWaterData()
+  const { data, loading } = useWaterData()
+  useDailyIntake({ data })
+
   return (
     <main className="min-h-screen bg-sky-50">
       <Header />
       <div className="mx-auto flex max-w-md flex-col px-6 py-8">
-        <WaterDashBoardCard data={data as  Water} loading={loading}/>
-        
+        <WaterDashBoardCard data={data as Water} loading={loading} />
+
 
         <section className="mt-8">
           <h3 className="mb-4 text-lg font-semibold text-slate-900">
             빠르게 추가하기
           </h3>
 
-          <DrinkButtons/>
+          <DrinkButtons />
         </section>
 
-      <DailyWaterSummary data={data as Water}/>
+        <DailyWaterSummary data={data as Water} />
       </div>
     </main>
   );
