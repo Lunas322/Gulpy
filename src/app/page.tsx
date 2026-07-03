@@ -14,9 +14,10 @@ export default function Home() {
   const { data, loading } = useWaterData()
   useDailyIntake({ data })
 
-  const handleClick = async () =>{
+  const handleClick = async () => {
+    console.log('요청됨')
     await OneSignal.Notifications.requestPermission()
-    console.log('요청 성공',  Notification.permission)
+    console.log('요청 성공', Notification.permission)
   }
 
   return (
@@ -28,15 +29,21 @@ export default function Home() {
 
         <section className="mt-8">
           <h3 className="mb-4 text-lg font-semibold text-slate-900"
-          onClick={handleClick}
+            onClick={handleClick}
           >
             빠르게 추가하기
           </h3>
+          <button
+            onClick={handleClick}
+            className="bg-blue-500 text-white p-2"
+          >
+            알림 요청
+          </button>
 
-          <DrinkButtons data={data as Water} loading={loading}/>
+          <DrinkButtons data={data as Water} loading={loading} />
         </section>
 
-        <DailyWaterSummary data={data as Water}  loading={loading}/>
+        <DailyWaterSummary data={data as Water} loading={loading} />
       </div>
     </main>
   );
