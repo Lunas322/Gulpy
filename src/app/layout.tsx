@@ -1,6 +1,7 @@
 import "./globals.css";
 import AuthProvider from "./components/AuthProvider";
 import AuthRedirect from "./components/AuthRedirect";
+import OneSignalProvider from "./components/OneSignalProvider";
 
 export default function RootLayout({
   children,
@@ -8,12 +9,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <AuthRedirect>
-      <AuthProvider>
-        <html>
-          <body>{children}</body>
-        </html>
-      </AuthProvider>
-    </AuthRedirect>
+    <html lang="ko">
+      <body>
+        <AuthRedirect>
+          <AuthProvider>
+            <OneSignalProvider />
+            {children}
+          </AuthProvider>
+        </AuthRedirect>
+      </body>
+    </html>
   );
 }
