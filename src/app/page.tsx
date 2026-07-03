@@ -6,12 +6,18 @@ import { Water } from "./types/water";
 import DrinkButtons from "./components/DrinkButtons";
 import DailyWaterSummary from "./components/DailyWaterSummary";
 import useDailyIntake from "./hooks/useDailyIntake";
+import OneSignal from "react-onesignal";
 
 export default function Home() {
 
 
   const { data, loading } = useWaterData()
   useDailyIntake({ data })
+
+  const handleClick = async () =>{
+    await OneSignal.Notifications.requestPermission()
+    console.log('요청 성공',  Notification.permission)
+  }
 
   return (
     <main className="min-h-screen bg-sky-50">
@@ -21,7 +27,9 @@ export default function Home() {
 
 
         <section className="mt-8">
-          <h3 className="mb-4 text-lg font-semibold text-slate-900">
+          <h3 className="mb-4 text-lg font-semibold text-slate-900"
+          onClick={handleClick}
+          >
             빠르게 추가하기
           </h3>
 
