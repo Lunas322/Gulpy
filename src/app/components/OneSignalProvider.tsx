@@ -1,51 +1,59 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import OneSignal from "react-onesignal";
 import { useAuthStore } from "../store/authStore";
 
 const ONESIGNAL_APP_ID = "16a9ee10-2ede-4d21-98fc-72addaf51408";
 
-let initialized = false;
-
 export default function OneSignalProvider() {
   const user = useAuthStore((state) => state.user);
+  const hasInit = useRef(false);
+  const hasLoggedIn = useRef(false);
+
   useEffect(() => {
-    async function init() {
-      if (initialized) return;
+    const init = async () => {
+      if (hasInit.current) return;
 
       try {
         await OneSignal.init({
           appId: ONESIGNAL_APP_ID,
         });
 
-        initialized = true;
+        hasInit.current = true;
+        console.log("OneSignal init done");
       } catch (err) {
         console.error("OneSignal init error:", err);
       }
-    }
+    };
 
     init();
   }, []);
+
   useEffect(() => {
-    async function login() {
+    const login = async () => {
       if (!user?.uid) return;
+      if (!hasInit.current) return;
+      if (hasLoggedIn.current) return;
 
       try {
+        const externalId = OneSignal.User.externalId;
 
-        if (!initialized) return;
+        if (externalId === user.uid) {
+          hasLoggedIn.current = true;
+          return;
+        }
 
         await OneSignal.login(user.uid);
 
-        await new Promise((r) => setTimeout(r, 300));
+        hasLoggedIn.current = true;
 
-        const externalId = OneSignal.User.externalId;
-        console.log("OneSignal external_id:", externalId);
-        console.log("OneSignal external_id:", externalId);
+        console.log("OneSignal logged in:", user.uid);
+        console.log("externalId:", OneSignal.User.externalId);
       } catch (err) {
         console.error("OneSignal login error:", err);
       }
-    }
+    };
 
     login();
   }, [user?.uid]);
