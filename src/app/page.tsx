@@ -20,6 +20,17 @@ export default function Home() {
     console.log('요청 성공', Notification.permission)
   }
 
+ async function sendNotification() {
+    const res = await fetch("/api/notification", {
+      method: "POST",
+    });
+
+    const data = await res.json();
+
+    console.log(data);
+  }
+
+
   return (
     <main className="min-h-screen bg-sky-50">
       <Header />
@@ -38,6 +49,12 @@ export default function Home() {
             className="bg-blue-500 text-white p-2"
           >
             알림 요청
+          </button>
+                    <button
+            onClick={sendNotification}
+            className="bg-blue-500 text-white p-2"
+          >
+            테스트 알림
           </button>
 
           <DrinkButtons data={data as Water} loading={loading} />
