@@ -1,5 +1,6 @@
 import { db } from "../firebase/firestore";
 import { doc, setDoc } from "firebase/firestore";
+import { calcNextSendAt } from "./calcNextSendAt";
 
 type Params = {
     target: number;
@@ -23,6 +24,7 @@ export default async function postWaterData({
         onboarding: true,
         now: 0,
         count: 0,
-        date: todayStr
+        date: todayStr,
+        nextSendAt: calcNextSendAt(interval ?? 60)
     });
 }
