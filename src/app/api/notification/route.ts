@@ -10,7 +10,7 @@ export async function POST() {
       },
       body: JSON.stringify({
         app_id: "16a9ee10-2ede-4d21-98fc-72addaf51408",
-        included_segments: ["Subscribed Users"],
+        included_segments:  ["All"],
         headings: {
           en: "💧 Gulpy",
         },
