@@ -1,39 +1,39 @@
 import {
+  createUserWithEmailAndPassword,
   getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 import { app } from "./firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "./firestore";
 export const auth = getAuth(app);
-
-export const provider = new GoogleAuthProvider();
-
-export const handleGoogleLogin = async () => {
-  const result = await signInWithPopup(auth, provider);
-  const userData = result.user;
-  try {
-    await setDoc(
-      doc(db, "users", userData.uid),
-      {
-        uid: userData.uid,
-        name: userData.displayName,
-        email: userData.email,
-      },
-      { merge: true },
-    );
-  } catch (error) {
-    console.error(error);
-  }
-  return result;
+export const handleLogin = async (
+  email: string,
+  password: string
+) => {
+  return await signInWithEmailAndPassword(auth, email, password);
 };
+export const handleSignUp = async (
+  name: string,
+  email: string,
+  password: string
+) => {
+  const result = await createUserWithEmailAndPassword(
+    auth,
+    email,
+    password
+  );
 
-export const handleGoogleLogout = async () => {
-  try {
-    await signOut(auth);
-  } catch (erro) {
-    console.log(erro);
-  }
+  await setDoc(
+    doc(db, "users", result.user.uid),
+    {
+      uid: result.user.uid,
+      name,
+      email,
+      createdAt: new Date().toISOString(),
+    },
+    { merge: true }
+  );
+
+  return result;
 };
