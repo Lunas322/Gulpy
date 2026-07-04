@@ -7,8 +7,10 @@ import DrinkButtons from "./components/DrinkButtons";
 import DailyWaterSummary from "./components/DailyWaterSummary";
 import useDailyIntake from "./hooks/useDailyIntake";
 import OneSignal from "react-onesignal";
+import { useAuthStore } from "./store/authStore";
 
 export default function Home() {
+  const user = useAuthStore((state)=>state.user)
 
 
   const { data, loading } = useWaterData()
@@ -20,15 +22,15 @@ export default function Home() {
     console.log('요청 성공', Notification.permission)
   }
 
- async function sendNotification() {
+async function sendNotification() {
     const res = await fetch("/api/notification", {
-      method: "POST",
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ uid: user?.uid }),
     });
-
     const data = await res.json();
-
     console.log(data);
-  }
+}
 
 
   return (
