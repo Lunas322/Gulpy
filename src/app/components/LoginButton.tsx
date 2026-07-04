@@ -9,7 +9,9 @@ export default function LoginButton() {
   const onLogin = async () => {
     try {
       const userData = await handleGoogleLogin();
-      setUser(userData.user);
+      if (userData) {
+        setUser(userData.user);
+      }
     } catch (error) {
       console.log(error);
       alert(`로그인 실패 : ${error}`)
