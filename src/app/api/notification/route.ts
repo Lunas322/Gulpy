@@ -9,7 +9,7 @@ export async function POST() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        app_id: process.env.NEXT_PUBLIC_ONESIGNAL_APP_ID,
+        app_id: "16a9ee10-2ede-4d21-98fc-72addaf51408",
         included_segments: ["Subscribed Users"],
         headings: {
           en: "💧 Gulpy",
