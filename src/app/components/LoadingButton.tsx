@@ -8,6 +8,7 @@ type Props = {
 export default function LoadingButton ({onClick,loading,text,buttonTitle}:Props) {
     return(
          <button
+         disabled={loading}
         onClick={onClick}
         className="flex h-14 w-full items-center justify-center rounded-2xl bg-sky-500 font-semibold text-white transition-all hover:bg-sky-600 hover:shadow-md active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70"
       >   
