@@ -12,9 +12,6 @@ export default function OneSignalProvider() {
   const hasInit = useRef(false);
   const hasLoggedIn = useRef(false);
 
-  // -----------------------------
-  // 1. INIT (딱 1번만)
-  // -----------------------------
   useEffect(() => {
     const init = async () => {
       if (hasInit.current) return;
@@ -34,9 +31,6 @@ export default function OneSignalProvider() {
     init();
   }, []);
 
-  // -----------------------------
-  // 2. LOGIN + SUBSCRIPTION
-  // -----------------------------
   useEffect(() => {
     const login = async () => {
       if (!user?.uid) return;
@@ -44,39 +38,16 @@ export default function OneSignalProvider() {
       if (hasLoggedIn.current) return;
 
       try {
-        // 1) 현재 externalId 확인
         const externalId = OneSignal.User.externalId;
 
-        // 2) 이미 같은 유저면 스킵
         if (externalId === user.uid) {
           hasLoggedIn.current = true;
           console.log("Already logged in:", externalId);
           return;
         }
-
-        // 3) 로그인
         await OneSignal.login(user.uid);
-
         hasLoggedIn.current = true;
-
-        console.log("OneSignal login success:", user.uid);
-
-        // 4) subscription 생성 시간 확보 (중요)
         await new Promise((r) => setTimeout(r, 1000));
-
-        // 5) 상태 체크 (디버깅용)
-        const permission = Notification.permission;
-        console.log("Notification permission:", permission);
-
-        console.log(
-          "externalId:",
-          OneSignal.User.externalId
-        );
-
-        console.log(
-          "push supported:",
-          OneSignal.Notifications.isPushSupported?.()
-        );
       } catch (err) {
         console.error("OneSignal login error:", err);
       }
