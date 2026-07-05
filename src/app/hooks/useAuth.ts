@@ -64,6 +64,7 @@ export default function useAuth() {
         setLoading(true)
         if (!name || !email || !password) {
             setError("모든 항목을 입력해주세요.");
+            setLoading(false)
             return;
         }
 
@@ -71,6 +72,7 @@ export default function useAuth() {
 
         if (!emailRegex.test(email)) {
             setError("올바른 이메일 형식이 아닙니다.");
+            setLoading(false)
             return;
         }
 
@@ -78,9 +80,9 @@ export default function useAuth() {
 
         if (!passwordRegex.test(password)) {
             setError("비밀번호는 8자 이상이며 영문과 숫자를 포함해야 합니다.");
+            setLoading(false)
             return;
         }
-
         try {
             await handleSignUp(name, email, password);
 
