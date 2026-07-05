@@ -6,13 +6,11 @@ import { Water } from "./types/water";
 import DrinkButtons from "./components/DrinkButtons";
 import DailyWaterSummary from "./components/DailyWaterSummary";
 import useDailyIntake from "./hooks/useDailyIntake";
-import useRequestPermission from "./hooks/useRequestPermission";
 
 export default function Home() {
 
   const { data, loading } = useWaterData()
   useDailyIntake({ data })
-  useRequestPermission()
   return (
     <main className="min-h-screen bg-sky-50">
       <Header />
