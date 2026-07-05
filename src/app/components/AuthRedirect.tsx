@@ -2,9 +2,9 @@
 
 import React, { useEffect } from "react";
 import { useAuthStore } from "../store/authStore";
-import { usePathname, useRouter } from "next/navigation";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/firestore";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function AuthRedirect({
   children,
@@ -27,7 +27,6 @@ export default function AuthRedirect({
     if (loading) return;
 
     const checkAuth = async () => {
-      // 로그인 안 된 경우
       if (!user) {
         if (!isAuthPage) {
           router.replace("/login");
@@ -46,10 +45,9 @@ export default function AuthRedirect({
 
         const data = userSnap.data();
 
-        // Firestore에 저장된 onboarding(boolean) 사용
         const onboarding = data.onboarding ?? false;
 
-        // 온보딩을 안 했으면
+
         if (!onboarding) {
           if (!isOnboardingPage) {
             router.replace("/onboarding");
@@ -57,8 +55,7 @@ export default function AuthRedirect({
           return;
         }
 
-        // 온보딩을 했으면 로그인/회원가입/온보딩 페이지 접근 불가
-        if (isAuthPage || isOnboardingPage) {
+        if (isAuthPage) {
           router.replace("/");
         }
       } catch (error) {
