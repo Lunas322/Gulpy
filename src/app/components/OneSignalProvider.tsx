@@ -22,7 +22,6 @@ export default function OneSignalProvider() {
         });
 
         hasInit.current = true;
-        console.log("OneSignal init done");
       } catch (err) {
         console.error("OneSignal init error:", err);
       }
@@ -42,7 +41,6 @@ export default function OneSignalProvider() {
 
         if (externalId === user.uid) {
           hasLoggedIn.current = true;
-          console.log("Already logged in:", externalId);
           return;
         }
         await OneSignal.login(user.uid);
