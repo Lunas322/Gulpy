@@ -7,4 +7,5 @@ export type Water = {
     count: number
     now: number
     date: string
+    nextSendAt: string
 }

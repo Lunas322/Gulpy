@@ -9,10 +9,8 @@ import useDailyIntake from "./hooks/useDailyIntake";
 
 export default function Home() {
 
-
   const { data, loading } = useWaterData()
   useDailyIntake({ data })
-
   return (
     <main className="min-h-screen bg-sky-50">
       <Header />
@@ -21,14 +19,15 @@ export default function Home() {
 
 
         <section className="mt-8">
-          <h3 className="mb-4 text-lg font-semibold text-slate-900">
+          <h3 className="mb-4 text-lg font-semibold text-slate-900"
+          >
             빠르게 추가하기
           </h3>
 
-          <DrinkButtons data={data as Water} loading={loading}/>
+          <DrinkButtons data={data as Water} loading={loading} />
         </section>
 
-        <DailyWaterSummary data={data as Water}  loading={loading}/>
+        <DailyWaterSummary data={data as Water} loading={loading} />
       </div>
     </main>
   );

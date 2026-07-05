@@ -1,4 +1,5 @@
 import Link from "next/link";
+import requestPermission from "../utils/requestPermission";
 
 export default function Header() {
   return (
@@ -13,7 +14,9 @@ export default function Header() {
         </Link>
 
         <div className="flex items-center gap-2">
-          <button className="flex h-10 w-10 items-center justify-center rounded-full hover:bg-slate-100">
+          <button className="flex h-10 w-10 items-center justify-center rounded-full hover:bg-slate-100"
+          onClick={requestPermission}
+          >
             🔔
           </button>
 

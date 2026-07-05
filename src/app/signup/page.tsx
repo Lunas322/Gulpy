@@ -1,8 +1,11 @@
-import LoginForm from "../components/LoginForm";
+import SignupForm from "../components/ SignupForm";
 
 
-export default function LoginPage() {
 
+
+
+
+export default function SignupPage() {
   return (
     <main className="flex min-h-screen items-center justify-center bg-sky-50 px-6">
       <div className="w-full max-w-md rounded-4xl border border-sky-100 bg-white p-10 shadow-lg shadow-sky-100/50">
@@ -10,19 +13,26 @@ export default function LoginPage() {
           <div className="mb-5 text-7xl">💧</div>
 
           <h1 className="text-4xl font-bold tracking-tight text-slate-900">
-            Gulpy
+            회원가입
           </h1>
 
           <p className="mt-3 leading-relaxed text-slate-500">
-            물을 마시는 습관을
+            Gulpy와 함께
             <br />
-            쉽고 꾸준하게 만들어보세요
+            건강한 물 마시는 습관을 시작해보세요
           </p>
         </div>
-        <LoginForm />
+
+        <SignupForm />
 
         <p className="mt-6 text-center text-sm text-slate-400">
-          로그인 후 바로 물 섭취를 기록할 수 있어요
+          이미 계정이 있으신가요?
+          <a
+            href="/login"
+            className="ml-1 font-medium text-sky-500 hover:text-sky-600"
+          >
+            로그인
+          </a>
         </p>
       </div>
     </main>
