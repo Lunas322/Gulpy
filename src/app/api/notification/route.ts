@@ -15,7 +15,6 @@ export async function POST(req: Request) {
             include_aliases: {
                 external_id: [uid],
             },
-            headings: { en: "💧 Gulpy" },
             contents: { en: "물 마실 시간입니다!" },
         }),
     });

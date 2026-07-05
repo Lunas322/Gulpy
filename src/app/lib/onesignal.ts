@@ -14,7 +14,6 @@ export async function sendPush(uid: string, remainingMl: number) {
       app_id: process.env.ONESIGNAL_APP_ID,
       target_channel: "push",
       include_aliases: { external_id: [uid] },
-      headings: { en: "💧 Gulpy" },
       contents: { en: content },
     }),
   });
